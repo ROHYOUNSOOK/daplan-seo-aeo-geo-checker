@@ -122,7 +122,7 @@ export default function Home() {
         style={{
           maxWidth: 720,
           margin: "0 auto",
-          padding: "56px 20px 80px",
+          padding: "20px 20px 80px",
           color: "#222",
         }}
       >
