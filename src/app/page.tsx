@@ -82,7 +82,11 @@ export default function Home() {
     setError(null);
     setResult(null);
     try {
-      const res = await fetch(`/api/check?url=${encodeURIComponent(url)}`);
+      let targetUrl = url.trim();
+      if (!/^https?:\/\//i.test(targetUrl)) {
+        targetUrl = `https://${targetUrl}`;
+      }
+      const res = await fetch(`/api/check?url=${encodeURIComponent(targetUrl)}`);
       const data = await res.json();
       if (!res.ok) {
         setError(data.error || "확인할 수 없습니다.");
@@ -97,15 +101,32 @@ export default function Home() {
   }
 
   return (
-    <main
-      style={{
-        maxWidth: 720,
-        margin: "0 auto",
-        padding: "56px 20px 80px",
-        color: "#222",
-      }}
-    >
-      <div style={{ textAlign: "center", marginBottom: 40 }}>
+    <>
+      <div
+        style={{
+          width: "100%",
+          background: "#000",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          padding: "18px 0",
+        }}
+      >
+        <img
+          src="https://cdn.imweb.me/thumbnail/20260812/b41d06dcd8e8a.png"
+          alt="동안기획 로고"
+          style={{ height: 40, display: "block" }}
+        />
+      </div>
+      <main
+        style={{
+          maxWidth: 720,
+          margin: "0 auto",
+          padding: "56px 20px 80px",
+          color: "#222",
+        }}
+      >
+        <div style={{ textAlign: "center", marginBottom: 40 }}>
         <p
           style={{
             fontSize: 13,
@@ -133,7 +154,7 @@ export default function Home() {
           required
           value={url}
           onChange={(e) => setUrl(e.target.value)}
-          placeholder="https://example.com"
+          placeholder="example.com"
           style={{
             flex: 1,
             padding: "14px 16px",
@@ -246,5 +267,6 @@ export default function Home() {
         본 도구는 daplan.com(동안기획)에서 제공하는 무료 기술 체크 도구입니다.
       </p>
     </main>
+    </>
   );
 }
