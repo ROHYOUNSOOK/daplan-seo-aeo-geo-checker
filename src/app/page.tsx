@@ -625,7 +625,7 @@ export default function Home() {
                 필요합니다.
               </p>
               <a
-                href="https://daplan-homepage.vercel.app/contact.html"
+                href={`https://new.daplan.com/contact/?service=webop&url=${encodeURIComponent(result.targetUrl)}`}
                 onMouseEnter={() => setCtaHover(true)}
                 onMouseLeave={() => setCtaHover(false)}
                 style={{
